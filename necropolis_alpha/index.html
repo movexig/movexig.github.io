@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Necropolis</title>
+		<link href="index.css" type="text/css" rel="stylesheet" />
+		<script type="module" src="game.js"></script>
+	</head>
+
+	<template id="CurrencyBarTemplate">
+		<div>
+			<span class="Current"></span>
+			<span class="Income"></span>
+		</div>
+	</template>
+
+	<template id="DomainLocationTemplate">
+		<div class="Location">
+			<div class="LocationName"></div>
+			<div class="Content">
+				<div class="WorkerAssignments">
+					<div class="Up">&#x25b2;</div>
+					<div class="Allocation"></div>
+					<div class="Down">&#x25bc;</div>
+				</div>
+				<div class="Buildings"></div>
+			</div>
+		</div>
+	</template>
+
+	<template id="DomainBuildingTemplate">
+		<div class="DomainBuilding">
+			<img />
+			<div class="LevelWidget">
+				<div class="Adjust Down">&#x25c0;</div>
+				<div class="Level"></div>
+				<div class="Adjust Up">&#x25b6;</div>
+			</div>
+		</div>
+	</template>
+
+	<template id="TechnologyTemplate">
+		<div class="Tech">
+			<div class="ProgressRing"></div>
+			<div class="ProgressFill Left"></div>
+			<div class="ProgressRingClip">
+				<div class="ProgressFill Right"></div>
+			</div>
+			<div class="Level"></div>
+		</div>
+	</template>
+
+	<template id="PrestigeUpgradeTemplate">
+		<div class="PrestigeUpgrade">
+		</div>
+	</template>
+
+	<template id="SpellButtonTemplate">
+		<div class="SpellButton">
+			<div class="Icon">
+				<img />
+				<div class="DurationFill Left"></div>
+				<div class="DurationClip">
+					<div class="DurationFill Right"></div>
+				</div>
+			</div>
+			<h1></h1>
+			<div class="MetamagicWidget">
+				<div class="Adjust Down">&#x25c0;</div>
+				<div class="Level"></div>
+				<div class="Adjust Up">&#x25b6;</div>
+			</div>
+		</div>
+	</template>
+
+	<template id="QueuedSpellTemplate">
+		<div class="QueuedSpell">
+			<div class="Count"></div>
+		</div>
+	</template>
+
+	<template id="StandingArmyUnitTemplate">
+		<div class="StandingArmyUnit">
+			<div class="Portrait"></div>
+			<div class="Count"></div>
+		</div>
+	</template>
+
+	<template id="ArmyDeploymentWidgetTemplate">
+		<div class="ArmyDeploymentWidget">
+			<div class="Adjust Up">&#x25b2;</div>
+			<div class="Portrait">
+				<div class="Count"></div>
+			</div>
+			<div class="Adjust Down">&#x25bc;</div>
+			</div>
+		</div>
+	</template>
+
+	<template id="SmallMilitaryUnitTemplate">
+		<div class="SmallMilitaryUnit">
+			<div class="Icon"></div>
+			<div class="Text"></div>
+		</div>
+	</template>
+
+	<template id="WarTarget">
+		<div class="WarTarget">
+			<div class="CityName"></div>
+			<div class="CityPopulation"></div>
+			<div class="ArmyList"></div>
+		</div>
+	</template>
+
+	<template id="BattleFileTemplate">
+		<div class="BattleFile">
+			<div class="RankSlot AttackerBack"><div class="Count"></div></div>
+			<div class="RankSlot AttackerFront"><div class="Count"></div></div>
+			<div class="Interaction"></div>
+			<div class="RankSlot DefenderFront"><div class="Count"></div></div>
+			<div class="RankSlot DefenderBack"><div class="Count"></div></div>
+		</div>
+	</template>
+
+	<template id="FeatTemplate">
+		<div class="Feat">
+			<div class="FeatName"></div>
+			<div class="FeatDescription"></div>
+		</div>
+	</template>
+
+	<body>
+		<div id="CurrenciesBar">
+		</div>
+		
+		<div id="MainContent">
+			<div id="Spellbook">
+				<div id="SpellList"></div>
+				<div id="SpellQueue"></div>
+			</div>
+			<div id="MiddleColumn">
+				<div class="TabBar">
+					<div id="TechTabButton"></div>
+					<div id="PrestigeTabButton"></div>
+					<div id="RecordsTabButton"></div>
+				</div>
+				<div id="Technologies">
+					<div id="TechTreeLines"></div>
+					<div id="TechTreeNodes"></div>
+				</div>
+				<div id="PrestigeUpgrades">
+					<div id="PrestigeTreeLines"></div>
+					<div id="PrestigeTreeNodes"></div>
+				</div>
+				<div id="Records">
+					<div id="StatisticsContainer">
+
+					</div>
+					<div id="FeatsContainer">
+
+					</div>
+				</div>
+			</div>
+			<div id="RightColumn">
+				<div class="TabBar">
+					<div id="DomainTabButton"></div>
+					<div id="MilitaryTabButton"></div>
+				</div>
+				<div id="Domain">
+					<div id="IdleWorkers"></div>
+					<div id="DomainLocations"></div>
+				</div>
+				<div id="Military">
+					<div id="PlayerFortStrength">
+						<div id="PlayerFortStrengthBar" class="FortBar">
+							<div class="BarFill"></div>
+							<div class="BarText">250 / 250</div>
+						</div>
+					</div>
+
+					<div id="PlayerStandingArmy"></div>
+					<div id="ArmyDeployment">
+						<div class="MilitaryBoxHeader">$ui_assault_header</div>
+
+						<div id="ArmyDeploymentUnitsOuter">
+							<div id="ArmyDeploymentUnits"></div>
+							<div id="ArmyDeploymentShortcuts">
+								<button id="ArmyDeployAll">$ui_deploy_all</button>
+								<button id="ArmyDeployNone">$ui_deploy_none</button>
+							</div>
+						</div>
+
+						<div id="ArmyDeploymentCost"></div>
+						<div id="WarTargets"></div>
+					</div>
+
+					<div id="ActiveBattle">
+						<div class="BattleName"></div>
+						<div class="BattleSideLabels">
+							<div>$ui_battle_side_you</div>
+							<div>$ui_battle_side_enemy</div>
+						</div>
+						<div class="BattleUnits">
+							<div class="Fortifications">
+								<div class="FortIndicator PlayerFort"></div>
+								<div class="FortIndicator EnemyFort"></div>
+							</div>
+							<div class="AttackerReserves"></div>
+							<div class="Frontline"></div>
+							<div class="DefenderReserves"></div>
+						</div>
+						<div class="RetreatButton"></div>
+					</div>
+
+					<div id="MilitaryBottomPanel">
+						<div id="BattleResult">
+							<div class="BattleName"></div>
+							<div class="BattleResultLabel BattleResultLabelCasualties">$ui_battleresult_casualties</div>
+							<div class="BattleResultCasualties"></div>
+							<div class="BattleResultLabel BattleResultLabelSpoils">$ui_battleresult_spoils</div>
+							<div class="BattleResultSpoils"></div>
+						</div>
+
+						<div id="Invaders" class="Invaders">
+							<div class="MilitaryBoxHeader">$ui_invaders_header</div>
+							<div class="ArmyList"></div>
+							<div class="Countdown"></div>
+						</div>
+
+						<div id="InvaderAnger" class="InvaderAnger">
+							<div class="MilitaryBoxHeader">$ui_invaderanger_header</div>
+							<div id="InvaderAngerBar">
+								<div class="BarFill"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="AlphaTest">$ui_alphatest</div>
+
+		<div id="SettingsButton"></div>
+		<div id="SaveIndicator"></div>
+
+		<div id="SettingsPopup" class="Popup">
+			<div class="Window">
+				<h2>$ui_settings_export</h2>
+				<p>$ui_settings_export_description</p>
+				<textarea id="SettingsPopup_SaveGame"></textarea>
+				<div class="Row">
+					<button id="SettingsPopup_Import">$ui_settings_import_btn</button>
+					<button id="SettingsPopup_Export">$ui_settings_export_btn</button>
+				</div>
+
+				<h2>$ui_settings_reset</h2>
+				<p>$ui_settings_reset_description</p>
+				<div class="Row">
+					<button id="SettingsPopup_SoftReset">$ui_settings_softreset</button>
+					<button class="HardReset" id="SettingsPopup_HardReset">$ui_settings_hardreset</button>
+					<input id="SettingsPopup_HardResetEnable" />
+				</div>
+				
+				<div class="ButtonRow">
+					<p class="About">$ui_about_game</p>
+					<button id="SettingsPopup_Close">$ui_settings_close</button>
+				</div>
+			</div>
+		</div>
+
+		<div id="Tooltip">
+			<div></div>
+		</div>
+
+		<div id="MessagePopup" class="Popup">
+			<div class="Window">
+				<h2 id="MessageHeader"></h2>
+				<div id="MessageText"></div>
+				
+				<button id="MessagePopup_Close"></button>
+			</div>
+		</div>
+
+		<div id="PrestigeDeathPopup">
+			<div id="PrestigeHeader">$ui_prestige_youhavedied</div>
+			<div id="PrestigeMessage"></div>
+			<div id="PrestigeReviveButton"></div>
+		</div>
+
+		<div id="LoadingScreen"></div>
+	</body>
+</html>
