@@ -53,6 +53,7 @@ body
 *::-webkit-scrollbar
 {
 	width: 8px;
+	height: 8px;
 	background: none;
 }
 *::-webkit-scrollbar-thumb
@@ -68,6 +69,10 @@ body
 {
 	background-color: #606060;
 }
+*::-webkit-scrollbar-corner
+{
+	background-color: black;
+}
 
 /****************************************************************************************************************************************/
 #AlphaTest
@@ -78,6 +83,7 @@ body
 	color: #903030;
 	padding: 2px;
 }
+
 /****************************************************************************************************************************************/
 #LoadingScreen
 {
@@ -120,7 +126,7 @@ body
 	margin: 0 10px;
 	display: none;
 	flex-direction: row;
-	min-width: 95px;
+	min-width: 100px;
 }
 #CurrenciesBar > div.Visible
 {
@@ -137,8 +143,12 @@ body
 	display: block;
 	margin-left: 4px;
 	color: #909090;
-	font-size: 11px;
-	padding-top: 4px;
+	font-size: 12px;
+	padding-top: 2px;
+}
+#CurrenciesBar .Income.Negative
+{
+	color: red;
 }
 
 #CurrenciesBar .CurrencyResearch .Income
@@ -179,7 +189,7 @@ body
 	border-top-color: #404040;
 	border-bottom-color: #101010;
 	border-radius: 4px;
-	box-shadow: 2px 2px 8px 4px black;
+	box-shadow: 2px 2px 16px 8px black;
 	background-color: #000000f8;
 	box-sizing: border-box;
 	max-width: 380px;
@@ -230,9 +240,15 @@ body
 {
 	margin-left: 10px;
 }
-#Tooltip .TechEffectHeader, #Tooltip .UpkeepHeader, #Tooltip .SpellEffectHeader
+#Tooltip .TechEffectHeader, #Tooltip .SpellEffectHeader
 {
 	color: gold;
+	margin-bottom: 4px;
+	margin-top: 4px;
+}
+#Tooltip .UpkeepHeader
+{
+	color: #808080;
 	margin-bottom: 4px;
 	margin-top: 4px;
 }
@@ -260,7 +276,16 @@ body
 {
 	color: gold;
 }
-
+#Tooltip .Information .MissingCurrency
+{
+	color: orange;
+}
+#Tooltip .Information .MissingCurrencyStorage
+{
+	color: red;
+	padding-right: 18px;
+	background: url("images/missing-storage.svg") no-repeat right/14px;
+}
 
 #Tooltip .InformationLeftRight
 {
@@ -312,7 +337,7 @@ h3
 /****************************************************************************************************************************************/
 #MiddleColumn
 {
-	flex: 1 1;
+	flex: 1 1 760px;
 	min-height: 0;
 
 	display: flex;
@@ -338,7 +363,6 @@ body:not(.RecordsEnabled) #RecordsTabButton
 
 	overflow-x: auto;
 	overflow-y: auto;
-
 	flex: 1 1;
 	position: relative;
 
@@ -355,7 +379,6 @@ body:not(.RecordsEnabled) #RecordsTabButton
 
 	overflow-x: auto;
 	overflow-y: auto;
-
 	flex: 1 1;
 	position: relative;
 
@@ -365,20 +388,23 @@ body:not(.RecordsEnabled) #RecordsTabButton
 
 	box-shadow: inset 0px 0px 32px 16px black;
 }
-
+#TechnologiesInner, #PrestigeUpgradesInner
+{
+	position: relative;
+	max-width: 760px;
+	margin: auto auto;
+}
 #TechTreeLines, #PrestigeTreeLines
 {
-	width: 840px;
+	width: 100%;
 	position: absolute;
-	left: calc(50% - 420px);
-	top: 20px;
 }
 #TechTreeNodes, #PrestigeTreeNodes
 {
-	width: 840px;
+	width: 100%;
+	position: absolute;
 	display: flex;
 	flex-direction: column;
-	margin: auto;
 }
 #TechTreeNodes > div, #PrestigeTreeNodes > div
 {
@@ -435,19 +461,72 @@ body:not(.RecordsEnabled) #RecordsTabButton
 
 	transition: filter 0.3s;
 }
+
+@keyframes TechResearching {
+	from {
+		background-color: #102030;
+		box-shadow:
+			inset 0px 0px 6px 3px black,
+			0px 0px 4px 2px rgba(0, 0, 0, 1),
+			0px 0px 24px rgba(119, 200, 255, 0.5);
+	}
+	50% {
+		background-color: #204060;
+		box-shadow:
+			inset 0px 0px 6px 3px black,
+			0px 0px 4px 2px rgba(0, 0, 0, 0.75),
+			0px 0px 24px rgb(119, 200, 255);
+	}
+	to {
+		background-color: #102030;
+		box-shadow:
+			inset 0px 0px 6px 3px black,
+			0px 0px 4px 2px rgba(0, 0, 0, 1),
+			0px 0px 24px rgba(119, 201, 255, 0.5);
+	}
+}
+@keyframes TechResearchingChoked {
+	from {
+		background-color: #302010;
+		box-shadow:
+			inset 0px 0px 6px 3px black,
+			0px 0px 4px 2px rgba(0, 0, 0, 1),
+			0px 0px 16px rgba(255, 165, 0, 0.25);
+	}
+	50% {
+		background-color: #483018;
+		box-shadow:
+			inset 0px 0px 6px 3px black,
+			0px 0px 4px 2px rgba(0, 0, 0, 0.75),
+			0px 0px 16px rgb(255, 165, 0, 0.75);
+	}
+	to {
+		background-color: #302010;
+		box-shadow:
+			inset 0px 0px 6px 3px black,
+			0px 0px 4px 2px rgba(0, 0, 0, 1),
+			0px 0px 16px rgba(255, 165, 0, 0.25);
+	}
+}
+
 .Tech.Hidden
 {
 	display: none;
 }
 .Tech.Researching
 {
-	background-color: #102030;
-	box-shadow: 0px 0px 6px rgb(119, 200, 255);
+	animation: TechResearching 2.0s infinite;
+	animation-timing-function: ease-in-out;
 }
 .Tech.Locked:not(.Researched)
 {
 	filter: brightness(20%);
 	cursor: default;
+}
+.Tech.Choked
+{
+	animation: TechResearchingChoked 2.0s infinite;
+	animation-timing-function: ease-in-out;
 }
 
 .Tech .ProgressRing
@@ -499,17 +578,22 @@ body:not(.RecordsEnabled) #RecordsTabButton
 {
 	width: 24px;
 	height: 48px;
-	border: 3px solid #a0a0a0;
+	border: 3px solid #808080;
 	position: absolute;
 	box-sizing: border-box;
+	transition: border-color 0.3s;
 }
 .Tech.Researching .ProgressFill
 {
 	border-color: var(--currency-research-color);
 }
+.Tech.Choked .ProgressFill
+{
+	border-color: orange;
+}
 .Tech:not(.Researching):not(.Locked):hover .ProgressFill
 {
-	border-color: #f0f0f0;
+	border-color: #d0d0d0;
 }
 .Tech .ProgressFill.Left
 {
@@ -649,7 +733,7 @@ body:not(.RecordsEnabled) #RecordsTabButton
 {
 	padding: 20px 10px;
 	
-	flex: 0 0 425px;
+	flex: 0 0.5 425px;
 	overflow-x: hidden;
 	overflow-y: auto;
 
@@ -702,6 +786,12 @@ body:not(.RecordsEnabled) #RecordsTabButton
 	display: flex;
 }
 
+.SpellButton .SpellButtonButton
+{
+	display: flex;
+	flex-direction: row;
+	flex: 1 1 0;
+}
 .SpellButton .Icon
 {
 	width: 36px;
@@ -722,30 +812,30 @@ body:not(.RecordsEnabled) #RecordsTabButton
 	border-bottom-color: #100020;
 	box-shadow: 0px 0px 4px 1px var(--currency-mana-color);
 }
-.SpellButton .Icon img
+.SpellButton .SpellButtonButton .Icon img
 {
 	position: absolute;
 	width: 32px;
 	height: 32px;
 	border-radius: 36px;
 }
-.SpellButton:hover .Icon
+.SpellButtonButton:hover .Icon
 {
 	background: linear-gradient(#181818, #080808);
 	border-color: #404040;
 }
-.SpellButton.Castable:active .Icon
+.SpellButton.Castable .SpellButtonButton:active .Icon
 {
 	background: linear-gradient(#303030, #202020);
 	border-color: #707070;
 	transform: translateY(1px);
 }
-.SpellButton:not(.Castable) .Icon img
+.SpellButton:not(.Castable) .SpellButtonButton .Icon img
 {
 	filter: brightness(0.3);
 }
 
-.SpellButton h1
+.SpellButton .SpellButtonButton h1
 {
 	margin-left: 5px;
 	font-size: 13px;
@@ -754,11 +844,11 @@ body:not(.RecordsEnabled) #RecordsTabButton
 	text-shadow: 1px 1px 2px black;
 	flex-grow: 1;
 }
-.SpellButton.Castable h1
+.SpellButton.Castable .SpellButtonButton h1
 {
 	color: gold;
 }
-.SpellButton.Castable:active h1
+.SpellButton.Castable .SpellButtonButton:active h1
 {
 	color: white;
 	transform: translateY(1px);
@@ -885,7 +975,7 @@ body:not(.RecordsEnabled) #RecordsTabButton
 /****************************************************************************************************************************************/
 #RightColumn
 {
-	flex: 0 0 425px;
+	flex: 0 0.5 425px;
 	min-height: 0;
 
 	display: flex;
@@ -1215,12 +1305,12 @@ span.Courtyard { color: var(--domain-courtyard-color); }
 {
 	width: 50px;
 	height: 50px;
-	background: no-repeat center/48px;
+	background: no-repeat center/42px;
 	border: 2px solid #707070;
 	border-top-color: #808080;
 	border-bottom-color: #606060;
 	border-radius: 50px;
-	box-shadow: inset 0px 0px 2px 1px black, 0px 0px 8px 4px black;
+	box-shadow: inset 0px 0px 2px 1px black, 0px 0px 2px 1px black;
 	box-sizing: border-box;
 	filter: brightness(90%);
 }
@@ -1248,8 +1338,51 @@ span.Courtyard { color: var(--domain-courtyard-color); }
 {
 	display: none;
 }
+.StandingArmyUnit.CanToggleRecruitment
+{
+	cursor: pointer;
+}
+.StandingArmyUnit.CanToggleRecruitment:active
+{
+	transform: translateY(1px);
+}
+
+@keyframes RecruitIndicator {
+	from {
+		transform: none;
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.StandingArmyUnit .RecruitIndicator
+{
+	width: 18px;
+	height: 18px;
+	border-radius: 18px;
+	position: absolute;
+	right: -8px;
+	bottom: 16px;
+	background: black url("images/autorecruit.svg") no-repeat center;
+	box-shadow: 0px 0px 2px 1px black;
+	animation: RecruitIndicator 4.0s infinite linear;
+}
+.StandingArmyUnit:not(.Recruiting) .RecruitIndicator
+{
+	animation: none;
+	filter: saturate(0) brightness(0.5);
+}
+.StandingArmyUnit:not(.CanToggleRecruitment) .RecruitIndicator
+{
+	display: none;
+}
 
 /***************************************************************************************************************************************/
+.MilitaryUnit
+{
+	color: steelblue;
+}
 .MilitarySkill, .MilitaryAttack, .MilitaryDefense
 {
 	background: left/16px no-repeat;
@@ -1288,12 +1421,12 @@ span.Courtyard { color: var(--domain-courtyard-color); }
 }
 .SmallMilitaryUnit .Icon
 {
-	width: 22px;
-	height: 22px;
+	width: 24px;
+	height: 24px;
 	border: 2px solid #808080;
 	background: black no-repeat center;
 	box-shadow: inset 0px 0px 1px 1px black;
-	border-radius: 22px;
+	border-radius: 24px;
 	box-sizing: border-box;
 }
 .SmallMilitaryUnit .Text
@@ -1302,6 +1435,19 @@ span.Courtyard { color: var(--domain-courtyard-color); }
 	margin-left: 4px;
 	font-size: 14px;
 	vertical-align: center;
+}
+
+.WarTargetFeature
+{
+	width: 24px;
+	height: 24px;
+	border: 2px solid #505080;
+	background: black no-repeat center;
+	box-shadow: inset 0px 0px 1px 1px black;
+	background-size: 18px;
+	border-radius: 8px;
+	box-sizing: border-box;
+	margin-left: 8px;
 }
 
 /***************************************************************************************************************************************/
@@ -1399,7 +1545,7 @@ span.Courtyard { color: var(--domain-courtyard-color); }
 {
 	width: 32px;
 	height: 32px;
-	background: no-repeat center/32px;
+	background: no-repeat center/28px;
 	border: 2px solid #707070;
 	border-top-color: #808080;
 	border-bottom-color: #606060;
@@ -2129,13 +2275,28 @@ span.Courtyard { color: var(--domain-courtyard-color); }
 	cursor: default;
 }
 
+#SettingsPopup input
+{
+	cursor: pointer;
+}
+#SettingsPopup label
+{
+	font-size: 14px;
+	cursor: pointer;
+}
+#SettingsPopup h2
+{
+	margin-top: 20px;
+	text-transform: uppercase;
+	border-bottom: 1px solid #606060;
+}
 #SettingsPopup > .Window
 {
 	width: 600px;
 }
 #SettingsPopup .About
 {
-	font-size: 10px;
+	font-size: 11px;
 	color: #a0a0a0;
 }
 #SettingsPopup .About a
@@ -2336,4 +2497,13 @@ span.Courtyard { color: var(--domain-courtyard-color); }
 .InactiveTabContent
 {
 	display: none !important;
+}
+
+.ModifierKey
+{
+	background-color: #303030;
+	color: #c0c0c0;
+	font-style: italic;
+	padding: 0 6px 0 3px;
+	border-radius: 4px;
 }

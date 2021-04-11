@@ -7,129 +7,132 @@
 		<script type="module" src="game.js"></script>
 	</head>
 
-	<template id="CurrencyBarTemplate">
-		<div>
-			<span class="Current"></span>
-			<span class="Income"></span>
-		</div>
-	</template>
+	<body>
+		<template id="CurrencyBarTemplate">
+			<div>
+				<span class="Current"></span>
+				<span class="Income"></span>
+			</div>
+		</template>
 
-	<template id="DomainLocationTemplate">
-		<div class="Location">
-			<div class="LocationName"></div>
-			<div class="Content">
-				<div class="WorkerAssignments">
-					<div class="Up">&#x25b2;</div>
-					<div class="Allocation"></div>
-					<div class="Down">&#x25bc;</div>
+		<template id="DomainLocationTemplate">
+			<div class="Location">
+				<div class="LocationName"></div>
+				<div class="Content">
+					<div class="WorkerAssignments">
+						<div class="Up">&#x25b2;</div>
+						<div class="Allocation"></div>
+						<div class="Down">&#x25bc;</div>
+					</div>
+					<div class="Buildings"></div>
 				</div>
-				<div class="Buildings"></div>
 			</div>
-		</div>
-	</template>
+		</template>
 
-	<template id="DomainBuildingTemplate">
-		<div class="DomainBuilding">
-			<img />
-			<div class="LevelWidget">
-				<div class="Adjust Down">&#x25c0;</div>
-				<div class="Level"></div>
-				<div class="Adjust Up">&#x25b6;</div>
-			</div>
-		</div>
-	</template>
-
-	<template id="TechnologyTemplate">
-		<div class="Tech">
-			<div class="ProgressRing"></div>
-			<div class="ProgressFill Left"></div>
-			<div class="ProgressRingClip">
-				<div class="ProgressFill Right"></div>
-			</div>
-			<div class="Level"></div>
-		</div>
-	</template>
-
-	<template id="PrestigeUpgradeTemplate">
-		<div class="PrestigeUpgrade">
-		</div>
-	</template>
-
-	<template id="SpellButtonTemplate">
-		<div class="SpellButton">
-			<div class="Icon">
+		<template id="DomainBuildingTemplate">
+			<div class="DomainBuilding">
 				<img />
-				<div class="DurationFill Left"></div>
-				<div class="DurationClip">
-					<div class="DurationFill Right"></div>
+				<div class="LevelWidget">
+					<div class="Adjust Down">&#x25c0;</div>
+					<div class="Level"></div>
+					<div class="Adjust Up">&#x25b6;</div>
 				</div>
 			</div>
-			<h1></h1>
-			<div class="MetamagicWidget">
-				<div class="Adjust Down">&#x25c0;</div>
+		</template>
+
+		<template id="TechnologyTemplate">
+			<div class="Tech">
+				<div class="ProgressRing"></div>
+				<div class="ProgressFill Left"></div>
+				<div class="ProgressRingClip">
+					<div class="ProgressFill Right"></div>
+				</div>
 				<div class="Level"></div>
-				<div class="Adjust Up">&#x25b6;</div>
 			</div>
-		</div>
-	</template>
+		</template>
 
-	<template id="QueuedSpellTemplate">
-		<div class="QueuedSpell">
-			<div class="Count"></div>
-		</div>
-	</template>
+		<template id="PrestigeUpgradeTemplate">
+			<div class="PrestigeUpgrade">
+			</div>
+		</template>
 
-	<template id="StandingArmyUnitTemplate">
-		<div class="StandingArmyUnit">
-			<div class="Portrait"></div>
-			<div class="Count"></div>
-		</div>
-	</template>
+		<template id="SpellButtonTemplate">
+			<div class="SpellButton">
+				<div class="SpellButtonButton">
+					<div class="Icon">
+						<img />
+						<div class="DurationFill Left"></div>
+						<div class="DurationClip">
+							<div class="DurationFill Right"></div>
+						</div>
+					</div>
+					<h1></h1>
+				</div>
+				<div class="MetamagicWidget">
+					<div class="Adjust Down">&#x25c0;</div>
+					<div class="Level"></div>
+					<div class="Adjust Up">&#x25b6;</div>
+				</div>
+			</div>
+		</template>
 
-	<template id="ArmyDeploymentWidgetTemplate">
-		<div class="ArmyDeploymentWidget">
-			<div class="Adjust Up">&#x25b2;</div>
-			<div class="Portrait">
+		<template id="QueuedSpellTemplate">
+			<div class="QueuedSpell">
 				<div class="Count"></div>
 			</div>
-			<div class="Adjust Down">&#x25bc;</div>
+		</template>
+
+		<template id="StandingArmyUnitTemplate">
+			<div class="StandingArmyUnit">
+				<div class="Portrait"></div>
+				<div class="Count"></div>
+				<div class="RecruitIndicator"></div>
 			</div>
-		</div>
-	</template>
+		</template>
 
-	<template id="SmallMilitaryUnitTemplate">
-		<div class="SmallMilitaryUnit">
-			<div class="Icon"></div>
-			<div class="Text"></div>
-		</div>
-	</template>
+		<template id="ArmyDeploymentWidgetTemplate">
+			<div class="ArmyDeploymentWidget">
+				<div class="Adjust Up">&#x25b2;</div>
+				<div class="Portrait">
+					<div class="Count"></div>
+				</div>
+				<div class="Adjust Down">&#x25bc;</div>
+				</div>
+			</div>
+		</template>
 
-	<template id="WarTarget">
-		<div class="WarTarget">
-			<div class="CityName"></div>
-			<div class="CityPopulation"></div>
-			<div class="ArmyList"></div>
-		</div>
-	</template>
+		<template id="SmallMilitaryUnitTemplate">
+			<div class="SmallMilitaryUnit">
+				<div class="Icon"></div>
+				<div class="Text"></div>
+			</div>
+		</template>
 
-	<template id="BattleFileTemplate">
-		<div class="BattleFile">
-			<div class="RankSlot AttackerBack"><div class="Count"></div></div>
-			<div class="RankSlot AttackerFront"><div class="Count"></div></div>
-			<div class="Interaction"></div>
-			<div class="RankSlot DefenderFront"><div class="Count"></div></div>
-			<div class="RankSlot DefenderBack"><div class="Count"></div></div>
-		</div>
-	</template>
+		<template id="WarTarget">
+			<div class="WarTarget">
+				<div class="CityName"></div>
+				<div class="CityPopulation"></div>
+				<div class="ArmyList"></div>
+			</div>
+		</template>
 
-	<template id="FeatTemplate">
-		<div class="Feat">
-			<div class="FeatName"></div>
-			<div class="FeatDescription"></div>
-		</div>
-	</template>
+		<template id="BattleFileTemplate">
+			<div class="BattleFile">
+				<div class="RankSlot AttackerBack"><div class="Count"></div></div>
+				<div class="RankSlot AttackerFront"><div class="Count"></div></div>
+				<div class="Interaction"></div>
+				<div class="RankSlot DefenderFront"><div class="Count"></div></div>
+				<div class="RankSlot DefenderBack"><div class="Count"></div></div>
+			</div>
+		</template>
 
-	<body>
+		<template id="FeatTemplate">
+			<div class="Feat">
+				<div class="FeatName"></div>
+				<div class="FeatDescription"></div>
+			</div>
+		</template>
+
 		<div id="CurrenciesBar">
 		</div>
 		
@@ -145,12 +148,16 @@
 					<div id="RecordsTabButton"></div>
 				</div>
 				<div id="Technologies">
-					<div id="TechTreeLines"></div>
-					<div id="TechTreeNodes"></div>
+					<div id="TechnologiesInner">
+						<div id="TechTreeLines"></div>
+						<div id="TechTreeNodes"></div>
+					</div>
 				</div>
 				<div id="PrestigeUpgrades">
-					<div id="PrestigeTreeLines"></div>
-					<div id="PrestigeTreeNodes"></div>
+					<div id="PrestigeUpgradesInner">
+						<div id="PrestigeTreeLines"></div>
+						<div id="PrestigeTreeNodes"></div>
+					</div>
 				</div>
 				<div id="Records">
 					<div id="StatisticsContainer">
@@ -245,6 +252,16 @@
 
 		<div id="SettingsPopup" class="Popup">
 			<div class="Window">
+				<h2>$ui_settings_main</h2>
+				<div class="Row">
+					<input type="checkbox" id="SettingsPopup_AbsTooltipValues" name="SettingsPopup_AbsTooltipValues" />
+					<label for="SettingsPopup_AbsTooltipValues">$ui_settings_abstooltipvalues</label>
+				</div>
+				<div class="Row">
+					<input type="checkbox" id="SettingsPopup_MaxStorageInBar" name="SettingsPopup_MaxStorageInBar" />
+					<label for="SettingsPopup_MaxStorageInBar">$ui_settings_maxstorageinbar</label>
+				</div>
+
 				<h2>$ui_settings_export</h2>
 				<p>$ui_settings_export_description</p>
 				<textarea id="SettingsPopup_SaveGame"></textarea>
