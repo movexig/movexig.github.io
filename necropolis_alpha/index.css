@@ -22,6 +22,7 @@
 
 	--currency-research-color: skyblue;
 	--currency-mana-color: rgb(165, 89, 236);
+	--currency-mana-color-dark: rgb(64, 34, 92);
 }
 
 html, body
@@ -84,6 +85,40 @@ body
 	padding: 2px;
 }
 
+#DebugContainer
+{
+	background: black;
+	color: #a0a0a0;
+	padding: 4px;
+	display: flex;
+	flex-direction: row;
+	height: 24px;
+	font-size: 12px;
+}
+#DebugContainer:not(.Visible)
+{
+	display: none;
+}
+
+#DebugContainer > div
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+#DebugContainer input[type=checkbox]
+{
+	cursor: pointer;
+}
+#DebugContainer label
+{
+	cursor: pointer;
+	padding: 1px;
+}
+#DebugContainer label:hover
+{
+	color: #eee;
+}
 /****************************************************************************************************************************************/
 #LoadingScreen
 {
@@ -126,7 +161,11 @@ body
 	margin: 0 10px;
 	display: none;
 	flex-direction: row;
-	min-width: 100px;
+	min-width: 115px;
+}
+#CurrenciesBar.ShowStorage > div
+{
+	min-width: 150px;
 }
 #CurrenciesBar > div.Visible
 {
@@ -157,9 +196,14 @@ body
 	font-size: 14px;
 	padding-top: 0;
 }
-#CurrenciesBar .CurrencyPrestige, #CurrenciesBar .CurrencyPrestigescraps, #CurrenciesBar .CurrencyResearch
+#CurrenciesBar .CurrencyPrestige, #CurrenciesBar .CurrencyPrestigescraps,
+#CurrenciesBar.ShowStorage .CurrencyPrestige, #CurrenciesBar.ShowStorage .CurrencyPrestigescraps
 {
-	min-width: 45px;
+	min-width: 50px;
+}
+#CurrenciesBar .CurrencyResearch, #CurrenciesBar.ShowStorage .CurrencyResearch
+{
+	min-width: 80px;
 }
 #CurrenciesBar .CurrencyPrestige .Income
 {
@@ -252,6 +296,34 @@ body
 	margin-bottom: 4px;
 	margin-top: 4px;
 }
+
+#Tooltip .MasteryHeader
+{
+	margin-bottom: 4px;
+	margin-top: 4px;
+}
+#Tooltip .MasteryHeader .Left
+{
+	color: #ff9100;
+	padding-left: 18px;
+	background: url("images/mastery.svg") no-repeat left/16px;
+}
+#Tooltip .Information.MasteryBonus
+{
+	color: white;
+	margin-left: 10px;
+}
+#Tooltip .Information.MasteryBonus.Unachieved
+{
+	color: #606060;
+}
+#Tooltip .Information.MasteryBonus.Unachieved *
+{
+	color: #606060;
+	background: none;
+	padding-left: 0;
+}
+
 #Tooltip .Information.TechNotResearched, #Tooltip .Information.SpellNotActive
 {
 	color: #808080;
@@ -276,6 +348,18 @@ body
 {
 	color: gold;
 }
+#Tooltip .Information .Technology
+{
+	color: var(--currency-research-color);
+	padding-left: 18px;
+	background: url("images/research.svg") no-repeat left/16px;
+}
+#Tooltip .Information .Mastery
+{
+	color: #ff9100;
+	padding-left: 18px;
+	background: url("images/mastery.svg") no-repeat left/16px;
+}
 #Tooltip .Information .MissingCurrency
 {
 	color: orange;
@@ -285,6 +369,11 @@ body
 	color: red;
 	padding-right: 18px;
 	background: url("images/missing-storage.svg") no-repeat right/14px;
+}
+#Tooltip .Information .Clarification
+{
+	font-style: italic;
+	color: #808080;
 }
 
 #Tooltip .InformationLeftRight
@@ -695,29 +784,34 @@ body:not(.RecordsEnabled) #RecordsTabButton
 #Records .Feat
 {
 	flex: 0 0 240px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	height: 48px;
 
 	background: black;
 	padding: 6px;
 	margin: 2px;
-	border: 1px solid #303030;
-	border-radius: 6px;
+	border: 1px solid #606060;
+	border-radius: 4px;
 	box-shadow: 0px 0px 6px 3px black;
 }
 #Records .FeatName
 {
 	font-size: 13px;
-	color: #606060;
+	color: #808080;
+	text-align: center;
 }
 #Records .FeatDescription
 {
-	font-size: 12px;
-	color: #404040;
+	font-size: 11px;
+	color: #808080;
+	text-align: center;
 }
 
 #Records .Feat.Achieved
 {
-	border-color: #606060;
+	border-color: gold;
 }
 #Records .Feat.Achieved .FeatName
 {
@@ -725,7 +819,7 @@ body:not(.RecordsEnabled) #RecordsTabButton
 }
 #Records .Feat.Achieved .FeatDescription
 {
-	color: #808080;
+	color: #c0c0c0;
 }
 
 /****************************************************************************************************************************************/
@@ -784,6 +878,10 @@ body:not(.RecordsEnabled) #RecordsTabButton
 .SpellButton.Visible
 {
 	display: flex;
+}
+.SpellButton.HasDuration
+{
+	background: linear-gradient(to right,#00000000 0%, var(--currency-mana-color-dark) 15%, #000000ff 50%, #00000000);
 }
 
 .SpellButton .SpellButtonButton
@@ -1806,12 +1904,10 @@ span.Courtyard { color: var(--domain-courtyard-color); }
 {
 	background: black;
 	box-shadow: 0px 2px 6px 3px black;
-	margin: 4px;
-	margin-top: 10px;
-	padding: 8px;
+	padding: 8px 32px;
 	border: 2px solid #a03030;
 	box-shadow: inset 0 0 8px #a03030, 1px 1px 4px 2px black;
-	border-radius: 4px;
+	border-radius: 8px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -1832,32 +1928,38 @@ span.Courtyard { color: var(--domain-courtyard-color); }
 	color: gold;
 	font-size: 15px;
 	margin: 3px 3px 6px 3px;
-}
-
-#ActiveBattle .BattleSideLabels
-{
-	display: flex;
-	flex-direction: row;
+	border-bottom: 1px solid #401010;
 	width: 100%;
 }
-#ActiveBattle .BattleSideLabels div
+
+#ActiveBattle .BattleInterface
 {
-	flex: 50% 0;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+#ActiveBattle .BattleStatus
+{
+	flex: 0 1 200px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#ActiveBattle .BattleStatusHeader
+{
+	width: 100%;
 	text-align: center;
 	color: #a0a0a0;
 	font-size: 12px;
+	text-decoration: underline;
 }
 
-#ActiveBattle .Fortifications
+#ActiveBattle .BattleStatus .Fortifications
 {
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-}
-#ActiveBattle .FortIndicator
-{
-	width: 50%;
-	height: 16px;
+	margin-top: 6px;
+	height: 18px;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 	background-position: 0% 50%;
@@ -1866,25 +1968,41 @@ span.Courtyard { color: var(--domain-courtyard-color); }
 	color: steelblue;
 	font-size: 12px;
 }
-#ActiveBattle .FortIndicator.Hidden
+#ActiveBattle .BattleStatus.NoFortifications .Fortifications
 {
-	visibility: hidden;
+	display: none;
+}
+
+#ActiveBattle .BattleStatus .NoFortifications
+{
+	margin-top: 6px;
+	height: 18px;
+	line-height: 18px;
+	color: #808080;
+	font-size: 10px;
+}
+#ActiveBattle .BattleStatus:not(.NoFortifications) .NoFortifications
+{
+	display: none;
 }
 
 #ActiveBattle .Frontline
 {
 	margin-top: 6px;
+	flex: 1 0 0;
 	display: flex;
-	flex-direction: column;
-	align-content: center;
+	flex-direction: row;
+	justify-content: center;
 }
 
 #ActiveBattle .BattleFile
 {
 	margin: 0 2px;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column-reverse;
 	margin-bottom: 2px;
+	justify-items: center;
+	align-items: center;
 }
 #ActiveBattle .BattleFile.Empty
 {
@@ -1929,19 +2047,23 @@ span.Courtyard { color: var(--domain-courtyard-color); }
 }
 #ActiveBattle .Interaction
 {
-	width: 28px;
-	height: 28px;
-	margin: 2px 0;
+	width: 16px;
+	height: 16px;
+	margin: 1px 0;
 	background: no-repeat center/20px;
 }
 #ActiveBattle .Interaction.Clash
 {
-	background-image: url("images/battle-clash.svg")
+	background-image: url("images/battle-clash.svg");
+	background-position: center;
 }
 #ActiveBattle .Interaction.Flank
 {
-	background-image: url("images/battle-flank.svg")
+	background-image: url("images/battle-flank.svg");
+	background-position: center;
 }
+
+/*
 #ActiveBattle .Interaction.Flank.AttackerLeft
 {
 	transform: scaleY(-1);
@@ -1961,6 +2083,23 @@ span.Courtyard { color: var(--domain-courtyard-color); }
 	transform: scaleX(-1);
 	background-position: bottom;
 }
+*/
+#ActiveBattle .Interaction.Flank.AttackerLeft
+{
+	transform: scaleX(-1);
+}
+/*#ActiveBattle .Interaction.Flank.AttackerRight
+{
+}*/
+#ActiveBattle .Interaction.Flank.DefenderLeft
+{
+	transform: scale(-1, -1);
+}
+#ActiveBattle .Interaction.Flank.DefenderRight
+{
+	transform: scaleY(-1);
+}
+
 
 #ActiveBattle .RetreatButton
 {
@@ -1977,6 +2116,22 @@ span.Courtyard { color: var(--domain-courtyard-color); }
 	transform: translateY(1px);
 }
 #ActiveBattle.Defensive .RetreatButton
+{
+	display: none;
+}
+
+#ActiveBattle .SpellEffects
+{
+	margin-top: 8px;
+}
+#ActiveBattle .NoSpellEffects
+{
+	height: 18px;
+	line-height: 18px;
+	color: #808080;
+	font-size: 10px;
+}
+#ActiveBattle .BattleStatus:not(.NoSpellEffects) .NoSpellEffects
 {
 	display: none;
 }
@@ -2027,6 +2182,22 @@ span.Courtyard { color: var(--domain-courtyard-color); }
 	color: #a0a0a0;
 	font-size: 12px;
 	text-shadow: 1px 1px black;
+}
+
+.BattleSpellEffect
+{
+	height: 16px;
+	background-position: left;
+	background-size: 16px 16px;
+	background-repeat: no-repeat;
+	padding-left: 20px;
+	font-size: 13px;
+	line-height: 16px;
+}
+
+.BattleSpellEffect_Palemist
+{
+	background-image: url('images/tech/fog.svg');
 }
 
 /***************************************************************************************************************************************

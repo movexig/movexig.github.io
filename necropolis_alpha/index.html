@@ -167,6 +167,32 @@
 
 					</div>
 				</div>
+
+				<div id="ActiveBattle">
+					<div class="BattleName"></div>
+					<div class="BattleInterface">
+						<div class="BattleStatus PlayerStatus">
+							<div class="BattleStatusHeader">$ui_battle_side_you</div>
+							<div class="Fortifications"></div>
+							<div class="NoFortifications">$ui_battle_side_nofort</div>
+							<div class="RetreatButton"></div>
+							<div class="Reserves"></div>
+							<div class="SpellEffects"></div>
+							<div class="NoSpellEffects">$ui_battle_side_noeffects</div>
+						</div>
+						
+						<div class="Frontline"></div>
+
+						<div class="BattleStatus EnemyStatus">
+							<div class="BattleStatusHeader">$ui_battle_side_enemy</div>
+							<div class="Fortifications"></div>
+							<div class="NoFortifications">$ui_battle_side_nofort</div>
+							<div class="Reserves"></div>
+							<div class="SpellEffects"></div>
+							<div class="NoSpellEffects">$ui_battle_side_noeffects</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div id="RightColumn">
 				<div class="TabBar">
@@ -201,24 +227,6 @@
 						<div id="WarTargets"></div>
 					</div>
 
-					<div id="ActiveBattle">
-						<div class="BattleName"></div>
-						<div class="BattleSideLabels">
-							<div>$ui_battle_side_you</div>
-							<div>$ui_battle_side_enemy</div>
-						</div>
-						<div class="BattleUnits">
-							<div class="Fortifications">
-								<div class="FortIndicator PlayerFort"></div>
-								<div class="FortIndicator EnemyFort"></div>
-							</div>
-							<div class="AttackerReserves"></div>
-							<div class="Frontline"></div>
-							<div class="DefenderReserves"></div>
-						</div>
-						<div class="RetreatButton"></div>
-					</div>
-
 					<div id="MilitaryBottomPanel">
 						<div id="BattleResult">
 							<div class="BattleName"></div>
@@ -245,6 +253,7 @@
 			</div>
 		</div>
 
+		<div id="DebugContainer"></div>
 		<div id="AlphaTest">$ui_alphatest</div>
 
 		<div id="SettingsButton"></div>
