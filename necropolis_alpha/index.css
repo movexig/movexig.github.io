@@ -140,7 +140,7 @@ body
 #CurrenciesBar
 {
 	width: 100%;
-	padding: 8px;
+	padding: 4px;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -158,7 +158,7 @@ body
 	background-size: 22px 22px;
 	background-repeat: no-repeat;
 	background-position: left;
-	margin: 0 10px;
+	margin: 4px 14px;
 	display: none;
 	flex-direction: row;
 	min-width: 115px;
@@ -1808,14 +1808,21 @@ span.Courtyard { color: var(--domain-courtyard-color); }
 	box-sizing: border-box;
 	margin: 8px;
 }
-#InvaderAngerBar .BarFill
+#InvaderAnger .BarFill
 {
 	height: 100%;
 	width: 100%;
 	background: rgb(70, 7, 7);
 	border-radius: 3px;
 }
-
+#InvaderAnger.ZeroChance .BarFill
+{
+	background: rgb(50, 50, 50);
+}
+#InvaderAnger.ZeroChance #InvaderAngerBar
+{
+	border-color: rgb(50, 50, 50);
+}
 /***************************************************************************************************************************************/
 #BattleResult
 {
@@ -2512,6 +2519,45 @@ span.Courtyard { color: var(--domain-courtyard-color); }
 	align-self: center;
 	margin-top: 16px;
 	outline: none;
+}
+
+#LoadErrorPopup
+{
+	background: black;
+}
+#LoadErrorPopup > .Window
+{
+	width: fit-content;
+	max-width: 600px;
+	border-color: red;
+}
+#LoadErrorPopup h2
+{
+	text-align: center;
+	font-size: 16px;
+	margin-bottom: 8px;
+	color: red;
+}
+#LoadErrorPopup, #LoadErrorPopup p
+{
+	text-align: center;
+	font-size: 14px;
+	color: #a0a0a0;
+	margin-bottom: 8px;
+	font-style: italic;
+}
+#LoadErrorPopup button
+{
+	width: fit-content;
+	align-self: center;
+	margin-top: 16px;
+	outline: none;
+}
+#LoadErrorPopup #LoadErrorException
+{
+	font-family: monospace;
+	color: red;
+	font-style: normal;
 }
 
 @keyframes PrestigeBackground {
